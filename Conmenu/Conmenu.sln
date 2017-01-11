@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conmenu", "Conmenu\Conmenu.csproj", "{8C34F12C-29FF-4754-861E-B49CEA380DB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conmenu Test", "Conmenu Test\Conmenu Test.csproj", "{32D82BC8-8DF7-4097-A3F5-792C05397CD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C34F12C-29FF-4754-861E-B49CEA380DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C34F12C-29FF-4754-861E-B49CEA380DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C34F12C-29FF-4754-861E-B49CEA380DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C34F12C-29FF-4754-861E-B49CEA380DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32D82BC8-8DF7-4097-A3F5-792C05397CD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32D82BC8-8DF7-4097-A3F5-792C05397CD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32D82BC8-8DF7-4097-A3F5-792C05397CD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32D82BC8-8DF7-4097-A3F5-792C05397CD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
