@@ -22,14 +22,8 @@ namespace Conmenu
 
         public static string Title
         {
-            get
-            {
-                return System.Console.Title;
-            }
-            set
-            {
-                System.Console.Title = value;
-            }
+            get => System.Console.Title;
+            set => System.Console.Title = value;
         }
         /// <summary>
         /// Quite important to call if you don't want the user to resize the console which WILL break things.

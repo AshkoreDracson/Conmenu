@@ -23,8 +23,9 @@ namespace Conmenu
         {
             string finalText = (new string(' ', Padding) + Text).PadRight(cri.Width);
 
-            System.Console.BackgroundColor = (Selected ? SelectedBackColor : BackColor);
-            System.Console.ForegroundColor = (Selected ? SelectedForeColor : ForeColor);
+            System.Console.BackgroundColor = Selected ? SelectedBackColor : BackColor;
+            System.Console.ForegroundColor = Selected ? SelectedForeColor : ForeColor;
+
             System.Console.Write(finalText);
             System.Console.BackgroundColor = ParentMenu.BackColor;
             System.Console.ForegroundColor = ParentMenu.ForeColor;

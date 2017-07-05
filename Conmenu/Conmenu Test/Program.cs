@@ -1,13 +1,15 @@
 ﻿using Conmenu;
+using System;
+using Console = Conmenu.Console;
+
 namespace Conmenu_Test
 {
-    class Program
+    internal static class Program
     {
         static Menu mainMenu = new Menu("Main menu");
-        static Menu createAccMenu = new Menu("Create account");
-        static Menu nestedMenu = new Menu("Nested menu (And with colors!)");
+        static Menu createAccountMenu = new Menu("Create account");
 
-        static void Main(string[] args)
+        static void Main()
         {
             Console.DisableConsoleResize();
             Console.Title = "Conmenu Test";
@@ -19,34 +21,28 @@ namespace Conmenu_Test
 
         static void InitializeMenus()
         {
+            mainMenu.BackColor = mainMenu.SelectedForeColor = ConsoleColor.DarkBlue;
+            createAccountMenu.BackColor = createAccountMenu.SelectedForeColor = ConsoleColor.DarkGreen;
+
             mainMenu.Controls.AddRange(new Control[]
             {
-                new Button(mainMenu, "Create account or something", createAccMenu.Show),
-                new Button(mainMenu, "Nested Menu", nestedMenu.Show),
-                new Button(mainMenu, "Exit", mainMenu.Hide)
-            });
+                new Button(mainMenu, "Create account", createAccountMenu.Show)
 
-            createAccMenu.ControlPadding = 3;
-            createAccMenu.ResetControlsOnHide = true;
-            createAccMenu.Controls.AddRange(new Control[]
-            {
-                new TextField(createAccMenu, "Name    "),
-                new TextField(createAccMenu, "Password") { Masked = true },
-                new TextField(createAccMenu, "Email   "),
-                new Checkbox(createAccMenu, "Some checkbox"),
-                new Separator(createAccMenu),
-                new Button(createAccMenu, "Create account"),
-                new Button(createAccMenu, "Cancel", createAccMenu.Hide)
             });
-
-            nestedMenu.BackColor = System.ConsoleColor.DarkMagenta;
-            nestedMenu.SelectedForeColor = System.ConsoleColor.DarkMagenta;
-            nestedMenu.Controls.AddRange(new Control[]
+            createAccountMenu.Controls.AddRange(new Control[]
             {
-                new Button(nestedMenu, "Button 1"),
-                new Button(nestedMenu, "Button 2"),
-                new Button(nestedMenu, "Button 3"),
-                new Button(nestedMenu, "Exit", nestedMenu.Hide)
+                new TextField(createAccountMenu, "Username"),
+                new TextField(createAccountMenu, "Email"),
+                new TextField(createAccountMenu, "Password") { Masked = true },
+                new Separator(createAccountMenu),
+                new Label(createAccountMenu, "Gender"),
+                new SelectionBox(createAccountMenu, "Male", "Female", "Other"),
+                new Label(createAccountMenu, "Age"),
+                new NumericBox(createAccountMenu) { Maximum = 99, Value = 18, Step = 1.0 / 12.0, Format = "N2" },
+                new Separator(createAccountMenu),
+                new Checkbox(createAccountMenu, "I agree to the terms, etc..."),
+                new Button(createAccountMenu, "Create", System.Console.Beep),
+                new Button(createAccountMenu, "Cancel", createAccountMenu.Hide)
             });
         }
     }

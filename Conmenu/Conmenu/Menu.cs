@@ -28,13 +28,10 @@ namespace Conmenu
         public bool ResetControlsOnHide { get; set; } = false;
         public bool ResetSelectedIndexOnHide { get; set; } = true;
 
-        public List<Control> Controls { get; private set; }
+        public List<Control> Controls { get; }
         public int SelectedIndex
         {
-            get
-            {
-                return _selectedIndex;
-            }
+            get => _selectedIndex;
             set
             {
                 if (Controls.Count <= 0) return;
@@ -46,10 +43,7 @@ namespace Conmenu
         }
         public Control SelectedControl
         {
-            get
-            {
-                return Controls[_selectedIndex];
-            }
+            get => Controls[_selectedIndex];
             set
             {
                 if (Controls.Count <= 0) return;
@@ -63,7 +57,7 @@ namespace Conmenu
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        private int _selectedIndex = 0;
+        private int _selectedIndex;
 
         public Menu(string title)
         {
@@ -114,14 +108,10 @@ namespace Conmenu
         {
             foreach (Control c in Controls)
             {
-                if (c is TextField)
-                {
-                    (c as TextField).Text = "";
-                }
-                if (c is Checkbox)
-                {
-                    (c as Checkbox).Checked = false;
-                }
+                if (c is TextField tf)
+                    tf.Text = "";
+                if (c is Checkbox chk)
+                    chk.Checked = false;
             }
         }
 
@@ -163,7 +153,7 @@ namespace Conmenu
                     Clear();
                 }
 
-                System.Console.CursorVisible = (Controls.Count > 0 && SelectedControl.RenderCursor);
+                System.Console.CursorVisible = Controls.Count > 0 && SelectedControl.RenderCursor;
 
                 int prevSelectedIndex = SelectedIndex;
                 ConsoleKeyInfo kInfo = System.Console.ReadKey(true);
@@ -194,7 +184,7 @@ namespace Conmenu
                 }
 
                 int nextSelectedIndex = SelectedIndex;
-                RenderLines(new int[] { prevSelectedIndex, nextSelectedIndex });
+                RenderLines(prevSelectedIndex, nextSelectedIndex);
             }
 
             if (ResetControlsOnHide)
@@ -217,7 +207,7 @@ namespace Conmenu
         {
             for (int i = 0; i < Controls.Count; i++)
             {
-                ControlRenderInfo cri = new ControlRenderInfo((i + 2 + Padding), System.Console.BufferWidth);
+                ControlRenderInfo cri = new ControlRenderInfo(i + 2 + Padding, System.Console.BufferWidth);
                 Controls[i].Render(cri);
             }
             RenderLines(SelectedIndex);
@@ -226,7 +216,7 @@ namespace Conmenu
         {
             foreach (int i in indexes)
             {
-                ControlRenderInfo cri = new ControlRenderInfo((i + 2 + Padding), System.Console.BufferWidth);
+                ControlRenderInfo cri = new ControlRenderInfo(i + 2 + Padding, System.Console.BufferWidth);
                 Controls[i].Render(cri);
             }
         }

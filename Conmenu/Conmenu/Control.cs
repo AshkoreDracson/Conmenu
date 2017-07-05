@@ -12,13 +12,7 @@ namespace Conmenu
 
         public Menu ParentMenu { get; private set; }
 
-        public bool Selected
-        {
-            get
-            {
-                return Selectable && ParentMenu.SelectedControl == this;
-            }
-        }
+        public bool Selected => Selectable && ParentMenu.SelectedControl == this;
         public bool Selectable { get; protected set; } = true;
 
         public delegate void OnSelectDelegate();
@@ -42,11 +36,11 @@ namespace Conmenu
 
         public ConsoleColor GetCurrentBackColor()
         {
-            return (Selected ? SelectedBackColor : BackColor);
+            return Selected ? SelectedBackColor : BackColor;
         }
         public ConsoleColor GetCurrentForeColor()
         {
-            return (Selected ? SelectedForeColor : ForeColor);
+            return Selected ? SelectedForeColor : ForeColor;
         }
 
         public void PerformEnter()
@@ -68,6 +62,6 @@ namespace Conmenu
             OnRender(cri);
         }
 
-        protected virtual void OnRender(ControlRenderInfo cri) { }
+        protected abstract void OnRender(ControlRenderInfo cri);
     }
 }

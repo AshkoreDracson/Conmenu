@@ -6,44 +6,23 @@ namespace Conmenu
         private int _cursorPosition;
         public int CursorPosition
         {
-            get
-            {
-                return _cursorPosition;
-            }
+            get => _cursorPosition;
             set
             {
                 _cursorPosition = value;
-                textStartIndex = (CursorPosition + (Padding * 2) - textMaxVisualLength).Clamp(0, int.MaxValue);
+                textStartIndex = (CursorPosition + Padding * 2 - textMaxVisualLength).Clamp(0, int.MaxValue);
             }
         }
         public string Label { get; set; }
         public bool Masked { get; set; }
         public int MaxLength { get; set; } = ushort.MaxValue;
         public string Text { get; set; }
-        public int VisualCursorPosition
-        {
-            get
-            {
-                return leftOffset + (CursorPosition - textStartIndex);
-            }
-        }
+        public int VisualCursorPosition => leftOffset + (CursorPosition - textStartIndex);
 
-        private int textStartIndex = 0;
+        private int textStartIndex;
 
-        private int leftOffset
-        {
-            get
-            {
-                return Padding + Label.Length + 2;
-            }
-        }
-        private int textMaxVisualLength
-        {
-            get
-            {
-                return ParentMenu.Width - (leftOffset);
-            }
-        }
+        private int leftOffset => Padding + Label.Length + 2;
+        private int textMaxVisualLength => ParentMenu.Width - leftOffset;
 
         public TextField(Menu parent, string label, string text = "") : base(parent)
         {
@@ -66,8 +45,8 @@ namespace Conmenu
         {
             string finalText = (new string(' ', Padding) + ($"{Label}: {GetText()}")).PadRight(cri.Width);
 
-            System.Console.BackgroundColor = (Selected ? SelectedBackColor : BackColor);
-            System.Console.ForegroundColor = (Selected ? SelectedForeColor : ForeColor);
+            System.Console.BackgroundColor = Selected ? SelectedBackColor : BackColor;
+            System.Console.ForegroundColor = Selected ? SelectedForeColor : ForeColor;
             System.Console.Write(finalText);
             System.Console.BackgroundColor = ParentMenu.BackColor;
             System.Console.ForegroundColor = ParentMenu.ForeColor;
@@ -137,21 +116,19 @@ namespace Conmenu
 
                 return Text;
             }
-            else
-            {
-                string finalText = Text.Substring(textStartIndex).Clamp(textMaxVisualLength);
 
-                if (Masked)
-                    finalText = new string('*', finalText.Length);
+            string finalText = Text.Substring(textStartIndex).Clamp(textMaxVisualLength);
 
-                if (CursorPosition > textMaxVisualLength)
-                    finalText = "..." + finalText.Substring(3);
+            if (Masked)
+                finalText = new string('*', finalText.Length);
 
-                if (VisualCursorPosition < textMaxVisualLength)
-                    finalText = finalText.Substring(0, finalText.Length - 3) + "...";
+            if (CursorPosition > textMaxVisualLength)
+                finalText = "..." + finalText.Substring(3);
 
-                return finalText;
-            }
+            if (VisualCursorPosition < textMaxVisualLength)
+                finalText = finalText.Substring(0, finalText.Length - 3) + "...";
+
+            return finalText;
         }
         void GotoHome()
         {

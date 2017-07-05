@@ -1,9 +1,9 @@
-﻿using System;
-
-namespace Conmenu
+﻿namespace Conmenu
 {
     public class Checkbox : Control
     {
+        public static char CheckedChar { get; set; } = 'X';
+
         public bool Checked { get; set; }
         public string Label { get; set; }
 
@@ -24,8 +24,8 @@ namespace Conmenu
         {
             string finalText = (new string(' ', Padding) + $"[{GetCheckedChar()}] {Label}").PadRight(cri.Width);
 
-            System.Console.BackgroundColor = (Selected ? SelectedBackColor : BackColor);
-            System.Console.ForegroundColor = (Selected ? SelectedForeColor : ForeColor);
+            System.Console.BackgroundColor = Selected ? SelectedBackColor : BackColor;
+            System.Console.ForegroundColor = Selected ? SelectedForeColor : ForeColor;
             System.Console.Write(finalText);
             System.Console.BackgroundColor = ParentMenu.BackColor;
             System.Console.ForegroundColor = ParentMenu.ForeColor;
@@ -33,7 +33,7 @@ namespace Conmenu
 
         char GetCheckedChar()
         {
-            return (Checked ? 'x' : ' ');
+            return Checked ? CheckedChar : ' ';
         }
     }
 }

@@ -4,10 +4,7 @@
     {
         public static string Clamp(this string s, int length)
         {
-            if (s.Length > length)
-                return s.Substring(0, length);
-
-            return s;
+            return s.Length > length ? s.Substring(0, length) : s;
         }
     }
 }
