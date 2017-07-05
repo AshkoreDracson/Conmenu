@@ -5,6 +5,9 @@ namespace Conmenu
     public class NumericBox : Control
     {
         private double _value;
+        /// <summary>
+        /// The value of this NumericBox
+        /// </summary>
         public double Value
         {
             get
@@ -19,14 +22,29 @@ namespace Conmenu
             }
         }
 
+        /// <summary>
+        /// The minimum allowed value
+        /// </summary>
         public double Minimum { get; set; } = 0.0;
+        /// <summary>
+        /// The maximum allowed value
+        /// </summary>
         public double Maximum { get; set; } = 10.0;
 
+        /// <summary>
+        /// The step of the increment/decrement
+        /// </summary>
         public double Step { get; set; } = 1.0;
 
         public delegate void OnValueChanged();
+        /// <summary>
+        /// Called whenever the value is changed
+        /// </summary>
         public event OnValueChanged ValueChanged;
 
+        /// <summary>
+        /// The optional number format to provide for the value
+        /// </summary>
         public string Format { get; set; } = string.Empty;
 
         public NumericBox(Menu parent) : base(parent)
@@ -34,11 +52,16 @@ namespace Conmenu
             OnKeyPress += SelectionBox_OnKeyPress;
         }
 
+        /// <summary>
+        /// Increments by step
+        /// </summary>
         public void Increment()
         {
             Value += Step;
         }
-
+        /// <summary>
+        /// Decrements by step
+        /// </summary>
         public void Decrement()
         {
             Value -= Step;

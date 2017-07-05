@@ -7,6 +7,9 @@ namespace Conmenu
     {
         private int _selectedIndex = -1;
 
+        /// <summary>
+        /// The selected index
+        /// </summary>
         public int SelectedIndex
         {
             get
@@ -29,14 +32,23 @@ namespace Conmenu
                 SelectionChanged?.Invoke();
             }
         }
+        /// <summary>
+        /// The selected item
+        /// </summary>
         public object SelectedItem
         {
             get => Items[SelectedIndex];
             set => SelectedIndex = Items.IndexOf(value);
         }
+        /// <summary>
+        /// The items of this SelectionBox
+        /// </summary>
         public List<object> Items { get; }
 
         public delegate void OnSelectionChanged();
+        /// <summary>
+        /// Called whenever the selection is changed
+        /// </summary>
         public event OnSelectionChanged SelectionChanged;
 
         public SelectionBox(Menu parent, params object[] items) : base(parent)

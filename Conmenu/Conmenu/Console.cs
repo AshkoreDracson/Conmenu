@@ -20,6 +20,9 @@ namespace Conmenu
         [DllImport("kernel32.dll", ExactSpelling = true)]
         private static extern IntPtr GetConsoleWindow();
 
+        /// <summary>
+        /// The title of the console
+        /// </summary>
         public static string Title
         {
             get => System.Console.Title;

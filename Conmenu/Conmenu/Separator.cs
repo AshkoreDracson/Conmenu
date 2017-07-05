@@ -2,6 +2,9 @@
 {
     public class Separator : Control
     {
+        /// <summary>
+        /// The text for this separator
+        /// </summary>
         public string Text { get; set; }
 
         public Separator(Menu parent, string text = "") : base(parent)

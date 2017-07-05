@@ -6,29 +6,80 @@ namespace Conmenu
     {
         private static bool needsRerendering = false;
 
+        /// <summary>
+        /// The default width of menus
+        /// </summary>
         public static int DefaultWidth { get; set; } = 80;
+        /// <summary>
+        /// The default height of menus
+        /// </summary>
         public static int DefaultHeight { get; set; } = 25;
+        /// <summary>
+        /// The default padding of menus
+        /// </summary>
         public static ushort DefaultPadding { get; set; } = 1;
+        /// <summary>
+        /// The default control padding of menus
+        /// </summary>
         public static ushort DefaultControlPadding { get; set; } = 1;
 
         public delegate void OnShowingDelegate();
         public delegate void OnHidingDelegate();
 
+        /// <summary>
+        /// Called when the menu is showing
+        /// </summary>
         public event OnShowingDelegate OnShowing;
+        /// <summary>
+        /// Called when the menu is hiding
+        /// </summary>
         public event OnHidingDelegate OnHiding;
 
+        /// <summary>
+        /// The back color of this menu
+        /// </summary>
         public ConsoleColor BackColor { get; set; } = ConsoleColor.Black;
+        /// <summary>
+        /// The fore color of this menu
+        /// </summary>
         public ConsoleColor ForeColor { get; set; } = ConsoleColor.Gray;
+        /// <summary>
+        /// The selected back color of this menu
+        /// </summary>
         public ConsoleColor SelectedBackColor { get; set; } = ConsoleColor.Gray;
+        /// <summary>
+        /// The selected fore color of this menu
+        /// </summary>
         public ConsoleColor SelectedForeColor { get; set; } = ConsoleColor.Black;
 
+        /// <summary>
+        /// The padding of the controls inside the menu.
+        /// </summary>
         public ushort ControlPadding { get; set; }
+        /// <summary>
+        /// Whetever the menu should auto-hide upon pressing the Escape key
+        /// </summary>
         public bool HideOnEscape { get; set; } = true;
+        /// <summary>
+        /// The padding of the menu itself
+        /// </summary>
         public ushort Padding { get; set; }
+        /// <summary>
+        /// Determines if the controls should be reset to their default values upon hiding
+        /// </summary>
         public bool ResetControlsOnHide { get; set; } = false;
+        /// <summary>
+        /// Determines if the selected index will be reset to 0 upon hiding
+        /// </summary>
         public bool ResetSelectedIndexOnHide { get; set; } = true;
 
+        /// <summary>
+        /// The list of controls
+        /// </summary>
         public List<Control> Controls { get; }
+        /// <summary>
+        /// The selected control index
+        /// </summary>
         public int SelectedIndex
         {
             get => _selectedIndex;
@@ -41,6 +92,9 @@ namespace Conmenu
                 SelectedControl.PerformSelect();
             }
         }
+        /// <summary>
+        /// The selected control
+        /// </summary>
         public Control SelectedControl
         {
             get => Controls[_selectedIndex];
@@ -51,10 +105,22 @@ namespace Conmenu
                 SelectedIndex = Controls.IndexOf(value);
             }
         }
+        /// <summary>
+        /// The title of this menu
+        /// </summary>
         public string Title { get; set; }
+        /// <summary>
+        /// Is this menu visible?
+        /// </summary>
         public bool Visible { get; private set; }
 
+        /// <summary>
+        /// The width of the menu
+        /// </summary>
         public int Width { get; private set; }
+        /// <summary>
+        /// The height of the menu
+        /// </summary>
         public int Height { get; private set; }
 
         private int _selectedIndex;
@@ -81,6 +147,9 @@ namespace Conmenu
             Height = height;
         }
 
+        /// <summary>
+        /// Clears and re-renders the menu
+        /// </summary>
         public void Clear()
         {
             System.Console.BackgroundColor = BackColor;
@@ -90,11 +159,17 @@ namespace Conmenu
             RenderTitle();
             RenderLines();
         }
+        /// <summary>
+        /// Hides the menu
+        /// </summary>
         public void Hide()
         {
             Visible = false;
             OnHiding?.Invoke();
         }
+        /// <summary>
+        /// Shows the menu
+        /// </summary>
         public void Show()
         {
             Visible = true;
@@ -104,6 +179,9 @@ namespace Conmenu
             DoMenu();
         }
 
+        /// <summary>
+        /// Resets the controls to their default value
+        /// </summary>
         public void ResetControls()
         {
             foreach (Control c in Controls)
@@ -112,9 +190,14 @@ namespace Conmenu
                     tf.Text = "";
                 if (c is Checkbox chk)
                     chk.Checked = false;
+                if (c is SelectionBox sc)
+                    sc.SelectedIndex = 0;
             }
         }
 
+        /// <summary>
+        /// Selects the previous control
+        /// </summary>
         public void SelectPrevious()
         {
             if (Controls.Count <= 0) return;
@@ -127,6 +210,9 @@ namespace Conmenu
                     SelectedIndex--;
             } while (!SelectedControl.Selectable);
         }
+        /// <summary>
+        /// Selects the next control
+        /// </summary>
         public void SelectNext()
         {
             if (Controls.Count <= 0) return;

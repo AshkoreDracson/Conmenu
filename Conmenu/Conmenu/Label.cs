@@ -2,7 +2,13 @@
 {
     public class Label : Control
     {
+        /// <summary>
+        /// The text of this label
+        /// </summary>
         public string Text { get; set; }
+        /// <summary>
+        /// The text alignement of this label
+        /// </summary>
         public TextAlignement TextAlignement { get; set; } = TextAlignement.Left;
 
         public Label(Menu parent, string text) : base(parent)

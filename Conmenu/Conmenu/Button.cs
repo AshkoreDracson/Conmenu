@@ -3,7 +3,13 @@ namespace Conmenu
 {
     public class Button : Control
     {
+        /// <summary>
+        /// The action of the button upon trigger
+        /// </summary>
         public Action Action { get; set; }
+        /// <summary>
+        /// The text of this button
+        /// </summary>
         public string Text { get; set; }
 
         public Button(Menu parent, string text, Action action = null) : base(parent)

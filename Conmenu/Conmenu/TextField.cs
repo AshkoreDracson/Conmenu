@@ -4,6 +4,9 @@ namespace Conmenu
     public class TextField : Control
     {
         private int _cursorPosition;
+        /// <summary>
+        /// The current cursor position of this TextField
+        /// </summary>
         public int CursorPosition
         {
             get => _cursorPosition;
@@ -13,10 +16,25 @@ namespace Conmenu
                 textStartIndex = (CursorPosition + Padding * 2 - textMaxVisualLength).Clamp(0, int.MaxValue);
             }
         }
+        /// <summary>
+        /// The label of this TextField
+        /// </summary>
         public string Label { get; set; }
+        /// <summary>
+        /// Determines if the input should be masked
+        /// </summary>
         public bool Masked { get; set; }
+        /// <summary>
+        /// The maximum length of the text
+        /// </summary>
         public int MaxLength { get; set; } = ushort.MaxValue;
+        /// <summary>
+        /// The text
+        /// </summary>
         public string Text { get; set; }
+        /// <summary>
+        /// The visual cursor position on the console
+        /// </summary>
         public int VisualCursorPosition => leftOffset + (CursorPosition - textStartIndex);
 
         private int textStartIndex;

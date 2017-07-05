@@ -2,15 +2,31 @@
 {
     public class Checkbox : Control
     {
-        public static char CheckedChar { get; set; } = 'X';
+        /// <summary>
+        /// The default checked char for any new checkbox control
+        /// </summary>
+        public static char DefaultCheckedChar { get; set; } = 'X';
 
+        /// <summary>
+        /// Determines if this checkbox is checked
+        /// </summary>
         public bool Checked { get; set; }
+        /// <summary>
+        /// The label of this checkbox
+        /// </summary>
         public string Label { get; set; }
+
+        /// <summary>
+        /// The checked char of this checkbox
+        /// </summary>
+        public char CheckedChar { get; set; }
 
         public Checkbox(Menu parent, string label, bool value = false) : base(parent)
         {
             Checked = value;
             Label = label;
+
+            CheckedChar = DefaultCheckedChar;
 
             OnEnter += Checkbox_OnEnter;
         }
