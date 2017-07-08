@@ -125,22 +125,13 @@ namespace Conmenu
 
         private int _selectedIndex;
 
-        public Menu(string title)
-        {
-            Controls = new List<Control>();
-            Title = title;
-
-            ControlPadding = DefaultControlPadding;
-            Padding = DefaultPadding;
-
-            Width = DefaultWidth;
-            Height = DefaultHeight;
-        }
+        public Menu(string title) : this(title, DefaultWidth, DefaultHeight) { }
         public Menu(string title, int width, int height)
         {
             Controls = new List<Control>();
             Title = title;
 
+            ControlPadding = DefaultControlPadding;
             Padding = DefaultPadding;
 
             Width = width;
