@@ -25,7 +25,7 @@ menu.Show();
 menu.Hide();
 ```
 
-Adding controls ("Control()" is whatever class inherits from `Control` (`Button`, `Checkbox`, `Separator`, `TextField`))
+Adding controls ("Control()" is whatever class inherits from `Control` (`Button`, `Checkbox`, `NumericBox`, `SelectionBox`, `Separator`, `TextField`))
 ```cs
 menu.Controls.Add(new Control());
 ```
